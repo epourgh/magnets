@@ -1,0 +1,28 @@
+#element {
+    margin-top: 300px;
+    margin: 0 auto;
+    background-color: blue;
+    width: 100px;
+    height: 20px;
+}
+
+#element2 {
+    margin-top: 300px;
+    margin: 0 auto;
+    background-color: red;
+    width: 100px;
+    height: 20px;
+}
+
+#element3 {
+    margin-top: 300px;
+    margin: 0 auto;
+    background-color: green;
+    width: 100px;
+    height: 20px;
+}
+
+body {
+    height: 3000px;
+    width: 100%;
+}
