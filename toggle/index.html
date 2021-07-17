@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #navbar {
+            width: 100vw !important;
+            height: 5vh !important;
+            background: #ff0;
+        }
+
+        #navbar button {
+            border-radius: 100px;
+            padding: .8em 1em;
+        }
+
+        #page0 {
+            width: 100vw;
+            height: 95vh;
+            background: #00f;
+            display: block;
+        }
+
+        #page1 {
+            width: 100vw;
+            height: 95vh;
+            background: #f00;
+            display: none;
+        }
+
+        #page2 {
+            width: 100vw;
+            height: 95vh;
+            background: #0f0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id='navbar'>
+        <button id='one'>1</button>
+        <button id='two'>2</button>
+        <button id='three'>3</button>
+        <br>
+    </div>
+
+    <section id='page0'>
+        <h1>Title</h1>
+        <p>description</p>
+    </section>
+
+    <section id='page1'>
+        <h1>Title 2</h1>
+        <p>description 2</p>
+    </section>
+
+
+    <section id='page2'>
+        <h1>Title 3</h1>
+        <p>description 3</p>
+    </section>
+</body>
+<script>
+    const changePage = (pageNumber = 2) => {
+
+        console.log(`page${pageNumber}`)
+        let pages = [0, 1, 2]
+        pages.forEach(page => {
+            document.getElementById(`page${page}`).style.display = 'none'
+        })
+        
+        document.getElementById(`page${pageNumber}`).style.display = 'block';
+    }
+
+    document.getElementById("one").addEventListener("click", function() { changePage(0); });
+    document.getElementById("two").addEventListener("click", function() { changePage(1); });
+    document.getElementById("three").addEventListener("click", function() { changePage(2); });
+</script>
+</html>
