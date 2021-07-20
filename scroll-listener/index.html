@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        #div-style {
+            width: 100vw;
+            height: 100vh;
+            background-color: #0fff;
+        }
+    </style>
+</head>
+<body>
+    <div id='div-style'></div>
+</body>
+<script>
+    let hexIndex = 0;
+    let scrollBoolean = false;
+    const hexColorSet = ['#0ff', '#ff0', '#f00', '#00f', '#f0f']
+
+    window.addEventListener('wheel', function(e) {
+        if (e.deltaY < 0) {
+            if (scrollBoolean !== true) {
+                scrollBoolean = true;
+                console.log('scrolling up');
+                hexIndex--;
+                document.getElementById("div-style").style.backgroundColor= hexColorSet[hexIndex];
+                loadTimeOut()
+            }
+        } else if (e.deltaY > 0) {
+            if (scrollBoolean !== true) {
+                scrollBoolean = true;
+                console.log('scrolling down');
+                hexIndex++;
+                document.getElementById("div-style").style.backgroundColor= hexColorSet[hexIndex];
+                loadTimeOut()
+            }
+        }
+    });
+
+    function loadTimeOut() {
+        return setTimeout(()=>{
+            scrollBoolean = false;    
+        }, 2500); 
+    }
+
+</script>
+</html>
