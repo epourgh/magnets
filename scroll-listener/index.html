@@ -15,33 +15,88 @@
             width: 100vw;
             height: 100vh;
             background-color: #0fff;
+            position: relative;
+        }
+        
+        .ul-style {
+            list-style: circle;
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+            padding: 0 5%;
+            margin: 0;
+            font-size: 3em;
+            cursor: pointer;
+            z-index: 2
+        }
+
+        .h1-style {
+            font-size: 10em;
+            width: 100vw;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
         }
     </style>
 </head>
 <body>
-    <div id='div-style'></div>
+    <div id='div-style'>
+        <ul class='ul-style'>
+            <li id='li-0' onClick='scrollToSection(0)'></li>
+            <li id='li-1' onClick='scrollToSection(1)'></li>
+            <li id='li-2' onClick='scrollToSection(2)'></li>
+            <li id='li-3' onClick='scrollToSection(3)'></li>
+            <li id='li-4' onClick='scrollToSection(4)'></li>
+        </ul>
+
+        <h1 id='h1-content' class='h1-style'>1</h1>
+
+    </div>
 </body>
 <script>
     let hexIndex = 0;
+    let previousIndex = 0;
     let scrollBoolean = false;
     const hexColorSet = ['#0ff', '#ff0', '#f00', '#00f', '#f0f']
+
+    document.getElementById(`li-0`).style.listStyle = 'disc';
 
     window.addEventListener('wheel', function(e) {
         if (e.deltaY < 0) {
             if (scrollBoolean !== true) {
                 scrollBoolean = true;
                 console.log('scrolling up');
-                hexIndex--;
+                hexIndex = hexIndex !== 0 ? hexIndex - 1:hexIndex;
                 document.getElementById("div-style").style.backgroundColor= hexColorSet[hexIndex];
+
+                document.getElementById(`li-${previousIndex}`).style.listStyle = 'circle';
+                document.getElementById(`li-${hexIndex}`).style.listStyle = 'disc';
+
+                document.getElementById(`h1-content`).innerHTML = hexIndex + 1;
+                
                 loadTimeOut()
+                
+                return previousIndex = hexIndex;
             }
         } else if (e.deltaY > 0) {
             if (scrollBoolean !== true) {
                 scrollBoolean = true;
                 console.log('scrolling down');
-                hexIndex++;
+                hexIndex = hexIndex < hexColorSet.length - 1 ? hexIndex + 1:hexIndex;
                 document.getElementById("div-style").style.backgroundColor= hexColorSet[hexIndex];
+
+
+                document.getElementById(`li-${previousIndex}`).style.listStyle = 'circle';
+                document.getElementById(`li-${hexIndex}`).style.listStyle = 'disc';
+
+                document.getElementById(`h1-content`).innerHTML = hexIndex + 1;
+        
                 loadTimeOut()
+
+                return previousIndex = hexIndex;
             }
         }
     });
@@ -49,7 +104,21 @@
     function loadTimeOut() {
         return setTimeout(()=>{
             scrollBoolean = false;    
-        }, 2500); 
+        }, 1500); 
+    }
+
+    function scrollToSection(index) {
+
+        document.getElementById(`li-${previousIndex}`).style.listStyle = 'circle';
+
+        document.getElementById("div-style").style.backgroundColor= hexColorSet[index];
+        document.getElementById(`li-${index}`).style.listStyle = 'disc';
+
+
+        document.getElementById(`h1-content`).innerHTML = index + 1;
+        
+        
+        return previousIndex = index;
     }
 
 </script>
