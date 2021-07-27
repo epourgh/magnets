@@ -65,39 +65,24 @@
     document.getElementById(`li-0`).style.listStyle = 'disc';
 
     window.addEventListener('wheel', function(e) {
-        if (e.deltaY < 0) {
-            if (scrollBoolean !== true) {
-                scrollBoolean = true;
-                console.log('scrolling up');
-                hexIndex = hexIndex !== 0 ? hexIndex - 1:hexIndex;
-                document.getElementById("div-style").style.backgroundColor= hexColorSet[hexIndex];
+        if (e.deltaY < 0 && scrollBoolean !== true) {
+            scrollBoolean = true;
+            hexIndex = hexIndex !== 0 ? hexIndex - 1:hexIndex;
 
-                document.getElementById(`li-${previousIndex}`).style.listStyle = 'circle';
-                document.getElementById(`li-${hexIndex}`).style.listStyle = 'disc';
+            changeStyle(hexIndex)
+            
+            loadTimeOut()
+            
+            return previousIndex = hexIndex;
+        } else if (e.deltaY > 0 && scrollBoolean !== true) {
+            scrollBoolean = true;
+            hexIndex = hexIndex < hexColorSet.length - 1 ? hexIndex + 1:hexIndex;
 
-                document.getElementById(`h1-content`).innerHTML = hexIndex + 1;
-                
-                loadTimeOut()
-                
-                return previousIndex = hexIndex;
-            }
-        } else if (e.deltaY > 0) {
-            if (scrollBoolean !== true) {
-                scrollBoolean = true;
-                console.log('scrolling down');
-                hexIndex = hexIndex < hexColorSet.length - 1 ? hexIndex + 1:hexIndex;
-                document.getElementById("div-style").style.backgroundColor= hexColorSet[hexIndex];
+            changeStyle(hexIndex)
+    
+            loadTimeOut()
 
-
-                document.getElementById(`li-${previousIndex}`).style.listStyle = 'circle';
-                document.getElementById(`li-${hexIndex}`).style.listStyle = 'disc';
-
-                document.getElementById(`h1-content`).innerHTML = hexIndex + 1;
-        
-                loadTimeOut()
-
-                return previousIndex = hexIndex;
-            }
+            return previousIndex = hexIndex;
         }
     });
 
@@ -109,16 +94,16 @@
 
     function scrollToSection(index) {
 
-        document.getElementById(`li-${previousIndex}`).style.listStyle = 'circle';
-
-        document.getElementById("div-style").style.backgroundColor= hexColorSet[index];
-        document.getElementById(`li-${index}`).style.listStyle = 'disc';
-
-
-        document.getElementById(`h1-content`).innerHTML = index + 1;
-        
+        changeStyle(index)
         
         return previousIndex = index;
+    }
+
+    function changeStyle(index) {
+        document.getElementById("div-style").style.backgroundColor= hexColorSet[index];
+        document.getElementById(`li-${previousIndex}`).style.listStyle = 'circle';
+        document.getElementById(`li-${index}`).style.listStyle = 'disc';
+        document.getElementById(`h1-content`).innerHTML = index + 1;
     }
 
 </script>
